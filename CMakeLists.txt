@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Export a compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_CXX_CLANG_FORMAT "clang-format -style=clang-format.json -fallback-style=LLVM")
+set(CMAKE_CXX_CLANG_FORMAT "clang-format -style=clang-format.json -fallback-style=WebKit")
 
 # Adding Raylib
 include(FetchContent)

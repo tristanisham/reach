@@ -6,18 +6,17 @@
 
 constexpr auto WINDOW_TITLE = "Cope";
 
-int main()
-{
+int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
 
     game::Player player{Vector2{400, 280}, 0, false};
      
     std::vector<game::EnvItem> envItems = {
-        {{0, 0, 1000, 400}, 0, LIGHTGRAY},
-        {{0, 400, 1000, 200}, 1, GRAY},
-        {{300, 200, 400, 10}, 1, GRAY},
-        {{250, 300, 100, 10}, 1, GRAY},
-        {{650, 300, 100, 10}, 1, GRAY}};
+        {{0, 0, 1000, 400}, false, LIGHTGRAY},
+        {{0, 400, 1000, 200}, true, GRAY},
+        {{300, 200, 400, 10}, true, GRAY},
+        {{250, 300, 100, 10}, true, GRAY},
+        {{650, 300, 100, 10}, true, GRAY}};
 
     Camera2D camera{};
     camera.target = player.position;
@@ -47,8 +46,7 @@ int main()
     //--------------------------------------------------------------------------------------
 
     // Main game loop
-    while (!WindowShouldClose())
-    {
+    while (!WindowShouldClose()) {
         // Update
         //----------------------------------------------------------------------------------
         float deltaTime = GetFrameTime();
@@ -62,14 +60,14 @@ int main()
         else if (camera.zoom < 0.25f)
             camera.zoom = 0.25f;
 
-        if (IsKeyPressed(KEY_R))
-        {
+        if (IsKeyPressed(KEY_R)) {
             camera.zoom = 1.0f;
             player.position = Vector2{400, 280};
         }
 
-        if (IsKeyPressed(KEY_C))
+        if (IsKeyPressed(KEY_C)) {
             cameraOption = (cameraOption + 1) % cameraUpdaters.size();
+        }
 
         // Call update camera function by its pointer
         cameraUpdaters[cameraOption](camera, player, envItems, deltaTime, SCREEN_WIDTH, SCREEN_HEIGHT);
